@@ -10,9 +10,9 @@ function getStoryUrl(storyNumber){
 
 
 //function returns an array of promises containing 30 stories (top or popular)
-export default function getStories(which) {
+export function getStories(which) {
 
-  let type = which === 'top' ? TOP_POSTS_URL : NEW_POSTS_URL
+  let type = which === 'Top' ? TOP_POSTS_URL : NEW_POSTS_URL
 
   return fetch(type)          
   .then(res => res.json()) //convert response body to JS object
