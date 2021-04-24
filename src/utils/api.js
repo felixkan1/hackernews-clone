@@ -26,7 +26,7 @@ export function getStories(which) {
 }
 
 
-function getItem(id) {
+export function getItem(id) {
   return fetch(getStoryUrl(id))
     .then(res => res.json())
 

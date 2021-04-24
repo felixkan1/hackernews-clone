@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
+
+
+#root{
+  max-width: 1400px;
+  margin: 0 auto;
+}
 html, body {
   margin:0;
   height: 0;
@@ -11,9 +17,7 @@ html, body {
   justify-content: space-between;
 }
 
-nav{
-  padding: 3rem;
-}
+
 .btn-clear{
   border:none;
   background: transparent;
@@ -21,14 +25,38 @@ nav{
   font-weight: 400;
 }
 
+
 .row{
   display: flex;
   flex-direction: row;
+  padding: 0;
+
 }
 
 .nav-link{
   list-style: none;
-  margin-right: 10px;
+
 }
 
+.posts{
+ padding: 0;
+}
 
+.post{
+  list-style: none;
+  margin-bottom: 20px;
+  color: gray;
+}
+
+.link{
+  color: rgb(187, 46, 31);
+  text-decoration:none;
+}
+
+.username{
+  color:black;
+}
+
+.comments{
+  color: black;
+}

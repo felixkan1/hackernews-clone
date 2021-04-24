@@ -1,6 +1,7 @@
 import React from 'react'
 import { getStories } from '../utils/api'
-
+import PropTypes from 'prop-types'
+import Item from './StoryItem'
 
 function Nav({selected, onUpdateCategory}) {
   
@@ -13,7 +14,7 @@ function Nav({selected, onUpdateCategory}) {
           <li key={category} className='nav-link'>
             <button 
             className='btn-clear'
-            style ={category === selected ? {color:'red'} : null}
+            style ={category === selected ? {color:'rgb(187, 46, 31)'} : null}
             onClick={() => onUpdateCategory(category)}
             >
               {category}
@@ -30,37 +31,37 @@ function Nav({selected, onUpdateCategory}) {
     </nav>
   )
 }  
-    
-    //     <li className='nav-link'>
-    //       <button className='btn-clear'>
-    //         Top
-    //       </button>
-    //     </li>
-    //     <li className='nav-link'>
-    //       <button 
-    //       className='btn-clear'
-          
-    //       >
-    //         New
-    //       </button>
-    //       </li>
-    //   </ul>
-    //   <button
-    //   style ={{fontSize:30}}
-    //   className='btn-clear nav-link'
-    // >
-    //   💡
-    // </button>
-   
 
+Nav.propTypes = {
+  selected: PropTypes.string.isRequired,
+  onUpdateCategory: PropTypes.func.isRequired
+}
+function StoryList ({ stories }) {
+  console.log(typeof stories, stories[0])
 
-//Story List - function
-// input: stories (array), output: list of 30 stories
-
-
-
-
-//class component: stories 
+  return(
+    <ul className = 'posts'>
+    {stories.map((story) =>{
+      const {by, descendants, time, title, url} = story
+      return(
+          <Item
+            title={title}
+            username={by}
+            time={time}
+            comments={descendants}
+            href={url}
+          />
+      )
+    })}
+  </ul>
+ 
+ 
+  )
+}
+ 
+StoryList.propTypes ={
+  stories: PropTypes.array.isRequired
+}
 
 
 export default class Stories extends React.Component{
@@ -111,7 +112,7 @@ export default class Stories extends React.Component{
   //loading screen
 
   render() {
-    const {selectedCategory, error } = this.state
+    const {selectedCategory, stories, error } = this.state
 
     return (
       <React.Fragment>
@@ -119,12 +120,13 @@ export default class Stories extends React.Component{
           selected={selectedCategory}
           onUpdateCategory={this.updateCategory}
         />
+    
+        {/* need to check if stories exist bc of async */}
+        {stories[selectedCategory] && <StoryList stories = {stories[selectedCategory]}/>}
+        
       </React.Fragment>
     )
   }
-
-
-
 }
 
 
