@@ -1,0 +1,4 @@
+
+
+- about property of user object may contain hex characters ie.
+"VP Engineering, StormForge \nhttp:&#x2F;&#x2F;stormforge.io"

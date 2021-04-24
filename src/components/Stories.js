@@ -2,16 +2,15 @@ import React from 'react'
 import { getStories } from '../utils/api'
 import PropTypes from 'prop-types'
 import Item from './StoryItem'
-import { Link } from 'react-router-dom'
 import Nav from './Nav'
 
-function StoryList ({ stories }) {
-  console.log(typeof stories, stories[0])
+export function StoryList ({ stories }) {
 
   return(
     <ul className = 'posts'>
     {stories.map((story) =>{
       const {by, descendants, time, title, url, id} = story
+      
       return(
           <Item
             key={url}

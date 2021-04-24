@@ -8,6 +8,10 @@ function getStoryUrl(storyNumber){
   return `${STORY_URL_BASE}${storyNumber}.json`
 }
 
+function getUserUrl(username){
+  return `${USER_URL_BASE}${username}.json`
+}
+
 
 //function returns an array of promises containing 30 stories (top or popular)
 export function getStories(which) {
@@ -26,14 +30,17 @@ export function getStories(which) {
 }
 
 
+
+
 export function getItem(id) {
   return fetch(getStoryUrl(id))
     .then(res => res.json())
 
 }
 
-export function getUser(userID){
-  
+export function getUser(username){
+  return fetch(getUserUrl(username))
+    .then(res => res.json())
 }
 
 
