@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeConsumer } from '../context/theme'
+import { Link } from 'react-router-dom'
 
 
-
-export default function Item ({title, username, time, comments, href}){
+export default function Item ({title, username, time, comments, href, postID}){
 
   if(!comments)comments = 0
 
@@ -18,11 +18,34 @@ export default function Item ({title, username, time, comments, href}){
 
   return (
    <li className ='post' >
+    
      <a className= 'link' href={`${href}`}>{title}</a>
      <div>
-      <span>by <a className="username" href ={`${href}`}>{username}</a></span>
-      <span> {date} </span>
-      <span><a className='comments' href='123'>  {comments} </a>comments</span>
+      
+      <span>by <Link
+        to={{
+          pathname:'/user',
+          search: `?id=${username}`
+        }}
+      >
+      
+      <button className="username btn-clear">{username}</button>
+      </Link>
+      
+      </span>
+      <span> {date} with  </span>
+      <span>
+      <Link
+        to={{
+          pathname:'/post',
+          search: `?id=${postID}`
+        }}
+      >
+      
+      <button className="username btn-clear">{comments} </button>
+      </Link>
+      &nbsp;comments
+      </span>
 
      </div>
 

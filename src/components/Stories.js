@@ -2,47 +2,16 @@ import React from 'react'
 import { getStories } from '../utils/api'
 import PropTypes from 'prop-types'
 import Item from './StoryItem'
+import { Link } from 'react-router-dom'
+import Nav from './Nav'
 
-function Nav({selected, onUpdateCategory}) {
-  
-  const categories = ['Top', 'New'];
-
-  return (
-    <nav className= 'row space-between'>
-      <ul className='row nav'>
-        {categories.map((category) => (
-          <li key={category} className='nav-link'>
-            <button 
-            className='btn-clear'
-            style ={category === selected ? {color:'rgb(187, 46, 31)'} : null}
-            onClick={() => onUpdateCategory(category)}
-            >
-              {category}
-            </button>            
-          </li>
-        ))}
-      </ul>
-      <button
-      style ={{fontSize:30}}
-      className='btn-clear nav-link'
-    >
-      💡
-    </button>
-    </nav>
-  )
-}  
-
-Nav.propTypes = {
-  selected: PropTypes.string.isRequired,
-  onUpdateCategory: PropTypes.func.isRequired
-}
 function StoryList ({ stories }) {
   console.log(typeof stories, stories[0])
 
   return(
     <ul className = 'posts'>
     {stories.map((story) =>{
-      const {by, descendants, time, title, url} = story
+      const {by, descendants, time, title, url, id} = story
       return(
           <Item
             key={url}
@@ -51,6 +20,7 @@ function StoryList ({ stories }) {
             time={time}
             comments={descendants}
             href={url}
+            postID={id}
           />
       )
     })}

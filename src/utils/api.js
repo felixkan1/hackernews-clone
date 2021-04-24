@@ -32,6 +32,10 @@ export function getItem(id) {
 
 }
 
+export function getUser(userID){
+  
+}
+
 
 
 

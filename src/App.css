@@ -21,10 +21,8 @@ html, body {
 .btn-clear{
   border:none;
   background: transparent;
-  font-size: 18px;
-  font-weight: 400;
   padding: 0;
-  margin-right: 15px;
+  font-size: inherit;
 }
 
 
@@ -37,7 +35,9 @@ html, body {
 
 .nav-link{
   list-style: none;
-
+  margin-right: 15px;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .posts{
@@ -57,6 +57,7 @@ html, body {
 
 .username{
   color:black;
+  text-decoration: underline;
 }
 
 .comments{
