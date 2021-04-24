@@ -45,6 +45,7 @@ function StoryList ({ stories }) {
       const {by, descendants, time, title, url} = story
       return(
           <Item
+            key={url}
             title={title}
             username={by}
             time={time}
