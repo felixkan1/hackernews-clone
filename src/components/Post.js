@@ -3,6 +3,54 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { getItem } from '../utils/api'
 import Item from './StoryItem'
+import { Link } from 'react-router-dom'
+
+
+function CommentsList ({comments}){ 
+  //filter for dead comments
+  console.log(comments)
+  comments = comments.filter(comment => !comment.dead && !comment.deleted)
+  //extract the information you need for each comment
+  
+  
+  return(
+    <ul className='comments'>
+      {/* map over each comments and display it */}
+      {comments.map(comment => {
+        const {by, time, text} = comment
+
+        let date = new Date(time*1000)
+        date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
+
+  
+        return(
+          <li className='comment' key={comment.id}>
+            <div className='comment-author'>
+              <span>by <Link
+                to = {{
+                  pathname: '/user',
+                  search: `?id=${by}`
+                }}      
+              >
+              {by}
+              </Link></span>
+              <span> on {date}</span>
+            </div>
+            <div dangerouslySetInnerHTML = {{__html:text}}>
+            
+            </div>
+
+
+          </li>
+        )
+      })}
+    </ul>
+  )
+
+}
+
+
+
 
 export default class Post extends React.Component{
   
@@ -16,7 +64,7 @@ export default class Post extends React.Component{
       numComments: null,
       comments: null,
       href: null,
-      id: null
+      id: null,
     }
   }
 
@@ -31,29 +79,36 @@ export default class Post extends React.Component{
       .then(post => {
         const {by, descendants, kids, time, title, url, id} = post
 
-      
         this.setState({
           title: title,
           username: by,
           time: time,
           numComments: descendants,
-          comments: kids,
           href: url,
           id:id
         })
+
+        //turn descendants(comment number) into comments
+        Promise.all(kids.map(getItem))
+          .then(comments => {
+            this.setState({
+              comments:comments
+            })
+          })
+
 
       })
   }
 
   render(){
     
-    const {title, username, time, numComments, href, id} = this.state
+    const {title, username, time, numComments, href, id, comments} = this.state
    
 
     return(
     <React.Fragment>
-
-    <div className = 'post'>
+    {/* Post title */}
+    <div className = 'comment-posts'>
       <Item 
         key={href}
         title={title}
@@ -63,6 +118,8 @@ export default class Post extends React.Component{
         href={href}
         postID={id}
       />
+      {/* Comments */}
+      {comments && <CommentsList comments={comments}/>}
     </div>
         
     </React.Fragment>  

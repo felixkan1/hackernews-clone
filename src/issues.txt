@@ -1,4 +1,5 @@
 
 
-- about property of user object may contain hex characters ie.
-"VP Engineering, StormForge \nhttp:&#x2F;&#x2F;stormforge.io"
+- about property of user object is an HTML string
+- text property of comment object is an HTML string
+- filter posts with not by property (they are deleted)

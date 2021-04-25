@@ -85,7 +85,7 @@ export default class User extends React.Component{
             joined {created} has <strong>{karma}</strong> karma
           </div>
           <br></br>
-          <div>{about}</div>
+          <div dangerouslySetInnerHTML ={{__html:about}}></div>
         </div>
         <h2>Posts</h2>
         {submitted && <StoryList stories = {submitted}/>}

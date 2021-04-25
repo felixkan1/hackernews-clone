@@ -31,7 +31,7 @@ export function getStories(which) {
 
 
 
-
+//can also be used for comments
 export function getItem(id) {
   return fetch(getStoryUrl(id))
     .then(res => res.json())

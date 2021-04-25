@@ -60,6 +60,25 @@ html, body {
   text-decoration: underline;
 }
 
+.comment-posts{
+  max-width: 80%;
+  margin: 0 auto;
+}
+
 .comments{
   color: black;
+  padding: 0px;
+ 
+}
+
+.comment{
+  list-style: none;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background: rgba(128, 128, 128, 0.1411764705882353);
+  padding: 10px;
+}
+
+.comment-author{
+  margin-bottom: 10px;
 }
