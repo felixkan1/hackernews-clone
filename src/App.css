@@ -33,11 +33,16 @@ html, body {
 
 }
 
+.nav li{
+  list-style: none;
+}
+
 .nav-link{
   list-style: none;
   margin-right: 15px;
   font-size: 18px;
   font-weight: 400;
+  text-decoration: none;
 }
 
 .posts{
@@ -47,7 +52,13 @@ html, body {
 .post{
   list-style: none;
   margin-bottom: 20px;
+  
+}
+
+.post-info{
+  font-size: 1rem;
   color: gray;
+  margin-bottom: 10px;
 }
 
 .link{
@@ -60,14 +71,19 @@ html, body {
   text-decoration: underline;
 }
 
+.commentPG-title{
+  font-size: 2rem;
+}
+
 .comment-posts{
   max-width: 80%;
   margin: 0 auto;
+  
 }
 
 .comments{
-  color: black;
   padding: 0px;
+  margin-bottom: 10rem;
  
 }
 

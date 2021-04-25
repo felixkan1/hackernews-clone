@@ -43,6 +43,7 @@ export default class User extends React.Component{
     getUser(user)
       .then(res => {
         const{created, id, karma, about, submitted} = res
+        const topSubmitted = submitted.slice(0,30)
 
         //convert unix time to date time
         let date = new Date(created*1000)
@@ -57,11 +58,12 @@ export default class User extends React.Component{
         })
        
         //get all of the users posts
-        Promise.all(submitted.map(getItem))
+        Promise.all(topSubmitted.map(getItem))
           //filter by story
           .then(posts => {
               posts = posts.filter( post => (post.type === "story" ))
               //posts is an array of objects of ther users posts
+              
               Promise.all(getStories(posts))
                 .then(story => this.setState({submitted: story}))
             })
@@ -85,7 +87,7 @@ export default class User extends React.Component{
             joined {created} has <strong>{karma}</strong> karma
           </div>
           <br></br>
-          <div dangerouslySetInnerHTML ={{__html:about}}></div>
+          <div dangerouslySetInnerHTML={{__html:about}}></div>
         </div>
         <h2>Posts</h2>
         {submitted && <StoryList stories = {submitted}/>}

@@ -19,8 +19,8 @@ export default function Item ({title, username, time, comments, href, postID}){
   return (
    <li className ='post' >
     
-     <a className= 'link' href={`${href}`}>{title}</a>
-     <div>
+     <a className = 'link' href={`${href}`}>{title}</a>
+     <div className ='post-info'>
       
       <span>by <Link
         to={{

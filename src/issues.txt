@@ -1,5 +1,9 @@
 
 
-- about property of user object is an HTML string
-- text property of comment object is an HTML string
+- about property of user object is an HTML string (DONE)
+- text property of comment object is an HTML string (DONE)
+
+
 - filter posts with not by property (they are deleted)
+- post with 0 comments are undefined
+- title on /post is an HTML string

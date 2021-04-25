@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 
 function CommentsList ({comments}){ 
   //filter for dead comments
-  console.log(comments)
   comments = comments.filter(comment => !comment.dead && !comment.deleted)
   //extract the information you need for each comment
   
@@ -25,14 +24,14 @@ function CommentsList ({comments}){
   
         return(
           <li className='comment' key={comment.id}>
-            <div className='comment-author'>
+            <div className='post-info'>
               <span>by <Link
                 to = {{
                   pathname: '/user',
                   search: `?id=${by}`
                 }}      
               >
-              {by}
+                <button className="username btn-clear">{by}</button>
               </Link></span>
               <span> on {date}</span>
             </div>
@@ -77,7 +76,7 @@ export default class Post extends React.Component{
 
     getItem(post)
       .then(post => {
-        const {by, descendants, kids, time, title, url, id} = post
+        let {by, descendants, kids, time, title, url, id} = post
 
         this.setState({
           title: title,
@@ -87,7 +86,7 @@ export default class Post extends React.Component{
           href: url,
           id:id
         })
-
+        if(!kids) kids = []
         //turn descendants(comment number) into comments
         Promise.all(kids.map(getItem))
           .then(comments => {
@@ -109,15 +108,17 @@ export default class Post extends React.Component{
     <React.Fragment>
     {/* Post title */}
     <div className = 'comment-posts'>
-      <Item 
-        key={href}
-        title={title}
-        username={username}
-        time={time}
-        comments={numComments}
-        href={href}
-        postID={id}
-      />
+      <div className='commentPG-title'>
+        <Item 
+          key={href}
+          title={title}
+          username={username}
+          time={time}
+          comments={numComments}
+          href={href}
+          postID={id}
+        />
+      </div>
       {/* Comments */}
       {comments && <CommentsList comments={comments}/>}
     </div>

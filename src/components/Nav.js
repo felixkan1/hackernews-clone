@@ -1,24 +1,43 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-export default function Nav({selected, onUpdateCategory}) {
+import { NavLink } from 'react-router-dom'
+
+const activeStyle ={
+  color:'rgb(187,46,31)'
+}
+
+
+
+export default function Nav() {
   
   const categories = ['Top', 'New'];
 
   return (
     <nav className= 'row space-between'>
       <ul className='row nav'>
-        {categories.map((category) => (
-          <li key={category} className='nav-link'>
-            <button 
-            className='btn-clear'
-            style ={category === selected ? {color:'rgb(187, 46, 31)'} : null}
-            onClick={() => onUpdateCategory(category)}
-            >
-              {category}
-            </button>            
-          </li>
-        ))}
-      </ul>
+        <li>
+          <NavLink
+          to='/'
+          className='nav-link'
+          exact
+          activeStyle={activeStyle}
+          >
+
+          Top
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+          to='/new'
+          className='nav-link'
+          activeStyle={activeStyle}
+          >
+
+          New
+          </NavLink>
+        </li>
+
+        </ul>
       <button
       style ={{fontSize:30}}
       className='btn-clear nav-link'

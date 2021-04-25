@@ -2,7 +2,7 @@ import React from 'react'
 import { getStories } from '../utils/api'
 import PropTypes from 'prop-types'
 import Item from './StoryItem'
-import Nav from './Nav'
+
 
 export function StoryList ({ stories }) {
 
@@ -47,7 +47,8 @@ export default class Stories extends React.Component{
     this.updateCategory = this.updateCategory.bind(this)
   }
   componentDidMount(){
-    this.updateCategory(this.state.selectedCategory)
+    const selection = this.props.location.pathname ==='/' ? 'Top' : 'New'
+    this.updateCategory(selection)
   }
 
   //pass this to nav as an onclick function on the buttons
@@ -86,11 +87,7 @@ export default class Stories extends React.Component{
 
     return (
       <React.Fragment>
-        <Nav
-          selected={selectedCategory}
-          onUpdateCategory={this.updateCategory}
-        />
-    
+        
         {/* need to check if stories exist bc of async */}
         {stories[selectedCategory] && <StoryList stories = {stories[selectedCategory]}/>}
         
