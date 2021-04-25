@@ -3,9 +3,10 @@
 
 
 #root{
-  max-width: 1400px;
   margin: 0 auto;
+ 
 }
+
 html, body {
   margin:0;
   height: 0;
@@ -15,6 +16,13 @@ html, body {
 
 .space-between{
   justify-content: space-between;
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px;
+  height: 100%;
 }
 
 .light{
@@ -38,8 +46,8 @@ html, body {
   display: flex;
   flex-direction: row;
   padding: 0;
-
 }
+
 
 .nav li{
   list-style: none;
@@ -56,11 +64,41 @@ html, body {
 
 .posts{
  padding: 0;
+ padding-bottom: 40px;
 }
 
 .post{
   list-style: none;
   margin-bottom: 20px;
+  
+}
+
+.meta-info-light{
+  font-size: 1rem;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.meta-info-dark{
+  font-size: 1rem;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+
+.meta-info-light a button{
+  font-size: 1rem;
+  color: black;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  
+}
+
+.meta-info-dark a button{
+  font-size: 1rem;
+  color: #bebebe;
+  margin-bottom: 10px;
+  text-decoration: underline;
   
 }
 
@@ -70,22 +108,26 @@ html, body {
   margin-bottom: 10px;
 }
 
-.link{
+.link-light{
   color: rgb(187, 46, 31);
   text-decoration:none;
+  font-weight: 800;
 }
 
-.username{
-  color:black;
-  text-decoration: underline;
+.link-dark{
+  color: rgb(203, 203, 203);
+  text-decoration:none;
+  font-weight: 800;
 }
+
+
 
 .commentPG-title{
   font-size: 2rem;
 }
 
 .comment-posts{
-  max-width: 80%;
+
   margin: 0 auto;
   
 }

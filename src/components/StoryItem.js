@@ -11,48 +11,51 @@ export default function Item ({title, username, time, comments, href, postID}){
 
   //convert time to MM/DD/YY, HH:MM (AM/PM)
   let date = new Date(time*1000)
-  date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
+  date = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`
 
   
  
 
   return (
-   <li className ='post' >
-    
-     <a className = 'link' href={`${href}`}>{title}</a>
-     <div className ='post-info'>
-      
-      <span>by <Link
-        to={{
-          pathname:'/user',
-          search: `?id=${username}`
-        }}
-      >
-      
-      <button className="username btn-clear">{username}</button>
-      </Link>
-      
-      </span>
-      <span> {date} with  </span>
-      <span>
-      <Link
-        to={{
-          pathname:'/post',
-          search: `?id=${postID}`
-        }}
-      >
-      
-      <button className="username btn-clear">{comments} </button>
-      </Link>
-      &nbsp;comments
-      </span>
 
-     </div>
+    <ThemeConsumer>
+      {({theme, toggleTheme}) => (
+      <li className ='post' >
+          <a className = {`link-${theme}`} href={`${href}`}>{title}</a>
+          {/* Post meta info */}
+          <div className ={`meta-info-${theme}`}>
+            
+            <span>by <Link
+              to={{
+                pathname:'/user',
+                search: `?id=${username}`
+              }}
+            >
+            
+            <button className="btn-clear">{username}</button>
+            </Link>
+            
+            </span>
+            <span> {date} with  </span>
+            <span>
+            <Link
+              to={{
+                pathname:'/post',
+                search: `?id=${postID}`
+              }}
+            >
+            
+            <button className="username btn-clear">{comments} </button>
+            </Link>
+            &nbsp;comments
+            </span>
 
-   </li>
+          </div>
+
+      </li>
+      )}
+    </ThemeConsumer>
   )
-
-
 }
 
 Item.propTypes ={

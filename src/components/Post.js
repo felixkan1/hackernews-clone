@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { getItem } from '../utils/api'
 import Item from './StoryItem'
+import { ThemeConsumer } from '../context/theme'
 import { Link } from 'react-router-dom'
 
 
@@ -13,37 +14,43 @@ function CommentsList ({comments}){
   
   
   return(
-    <ul className='comments'>
-      {/* map over each comments and display it */}
-      {comments.map(comment => {
-        const {by, time, text} = comment
 
-        let date = new Date(time*1000)
-        date = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
+    <ThemeConsumer>
+      {({theme}) => (
 
-  
-        return(
-          <li className='comment' key={comment.id}>
-            <div className='post-info'>
-              <span>by <Link
-                to = {{
-                  pathname: '/user',
-                  search: `?id=${by}`
-                }}      
-              >
-                <button className="username btn-clear">{by}</button>
-              </Link></span>
-              <span> on {date}</span>
-            </div>
-            <div dangerouslySetInnerHTML = {{__html:text}}>
-            
-            </div>
+          <ul className='comments'>
+            {/* map over each comments and display it */}
+            {comments.map(comment => {
+              const {by, time, text} = comment
+
+              let date = new Date(time*1000)
+              date = `${date.toLocaleDateString()}, ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`
+
+        
+              return(
+                <li className='comment' key={comment.id}>
+                  <div className={`meta-info-${theme}`}>
+                    <span>by <Link
+                      to = {{
+                        pathname: '/user',
+                        search: `?id=${by}`
+                      }}      
+                    >
+                      <button className="username btn-clear">{by}</button>
+                    </Link></span>
+                    <span> on {date}</span>
+                  </div>
+                  <div dangerouslySetInnerHTML = {{__html:text}}>
+                  
+                  </div>
 
 
-          </li>
-        )
-      })}
-    </ul>
+                </li>
+              )
+            })}
+          </ul>
+      )}
+    </ThemeConsumer>
   )
 
 }
@@ -105,28 +112,29 @@ export default class Post extends React.Component{
    
 
     return(
-    <React.Fragment>
-    {/* Post title */}
-    <div className = 'comment-posts'>
-      <div className='commentPG-title'>
-        <Item 
-          key={href}
-          title={title}
-          username={username}
-          time={time}
-          comments={numComments}
-          href={href}
-          postID={id}
-        />
+    <ThemeConsumer>
+      {({theme}) => (
+
+      <div className = 'comment-posts'>
+        <div className='commentPG-title'>
+          {/* Post title */}
+          <Item 
+            key={href}
+            title={title}
+            username={username}
+            time={time}
+            comments={numComments}
+            href={href}
+            postID={id}
+          />
+        </div>
+        {/* Comments */}
+        {comments && <CommentsList comments={comments}/>}
       </div>
-      {/* Comments */}
-      {comments && <CommentsList comments={comments}/>}
-    </div>
-        
-    </React.Fragment>  
+
+      )}
+    </ThemeConsumer>
+
     )
   }
-
-
-
 }
