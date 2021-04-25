@@ -17,6 +17,14 @@ html, body {
   justify-content: space-between;
 }
 
+.light{
+  background-color: white;
+}
+
+.dark{
+  background-color: #1c2022;
+  color: #DADADA;;
+}
 
 .btn-clear{
   border:none;
@@ -43,6 +51,7 @@ html, body {
   font-size: 18px;
   font-weight: 400;
   text-decoration: none;
+  color:inherit;
 }
 
 .posts{
