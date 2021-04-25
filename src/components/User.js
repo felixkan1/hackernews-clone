@@ -2,7 +2,7 @@ import React from 'react';
 import { getUser, getItem } from '../utils/api'
 import { StoryList } from './Stories'
 import queryString from 'query-string'
-
+import Loading from './Loading'
 
 
 
@@ -24,7 +24,8 @@ export default class User extends React.Component{
       karma:null,
       about: null, 
       submitted: null,
-      error: null
+      error: null,
+      loading: true
     }
   }
 
@@ -65,7 +66,10 @@ export default class User extends React.Component{
               //posts is an array of objects of ther users posts
               
               Promise.all(getStories(posts))
-                .then(story => this.setState({submitted: story}))
+                .then(story => this.setState({
+                  submitted: story,
+                  loading: false
+                }))
             })
 
 
@@ -76,10 +80,13 @@ export default class User extends React.Component{
 
 
   render(){
-    const {created, user, karma, about, submitted} = this.state
+    const {created, user, karma, about, submitted,loading} = this.state
 
     return(
+    
     <React.Fragment>
+    {loading && <Loading/>}
+     {!loading &&
      <div className ='userpage'>
         <div>
           <h1>{user}</h1>
@@ -92,6 +99,8 @@ export default class User extends React.Component{
         <h2>Posts</h2>
         {submitted && <StoryList stories = {submitted}/>}
      </div>
+       
+     }
     </React.Fragment>
   
     )

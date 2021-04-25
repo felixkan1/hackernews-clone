@@ -5,7 +5,7 @@ import { getItem } from '../utils/api'
 import Item from './StoryItem'
 import { ThemeConsumer } from '../context/theme'
 import { Link } from 'react-router-dom'
-
+import Loading from './Loading'
 
 function CommentsList ({comments}){ 
   //filter for dead comments
@@ -71,6 +71,7 @@ export default class Post extends React.Component{
       comments: null,
       href: null,
       id: null,
+      loading: true
     }
   }
 
@@ -98,7 +99,8 @@ export default class Post extends React.Component{
         Promise.all(kids.map(getItem))
           .then(comments => {
             this.setState({
-              comments:comments
+              comments:comments,
+              loading: false
             })
           })
 
@@ -108,32 +110,34 @@ export default class Post extends React.Component{
 
   render(){
     
-    const {title, username, time, numComments, href, id, comments} = this.state
+    const {title, username, time, numComments, href, id, comments,loading} = this.state
    
 
     return(
-    <ThemeConsumer>
-      {({theme}) => (
+      <React.Fragment>
+        {loading && <Loading/>}
+        {!loading &&
+          <div className = 'comment-posts'>
+            <div className='commentPG-title'>
+              {/* Post title */}
+              <Item 
+                key={href}
+                title={title}
+                username={username}
+                time={time}
+                comments={numComments}
+                href={href}
+                postID={id}
+              />
+            </div>
+            {/* Comments */}
+            {comments && <CommentsList comments={comments}/>}
+          </div>
+        }
+      </React.Fragment>
+    
 
-      <div className = 'comment-posts'>
-        <div className='commentPG-title'>
-          {/* Post title */}
-          <Item 
-            key={href}
-            title={title}
-            username={username}
-            time={time}
-            comments={numComments}
-            href={href}
-            postID={id}
-          />
-        </div>
-        {/* Comments */}
-        {comments && <CommentsList comments={comments}/>}
-      </div>
-
-      )}
-    </ThemeConsumer>
+  
 
     )
   }

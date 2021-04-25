@@ -2,6 +2,7 @@ import React from 'react'
 import { getStories } from '../utils/api'
 import PropTypes from 'prop-types'
 import Item from './StoryItem'
+import Loading from './Loading'
 
 
 export function StoryList ({ stories }) {
@@ -41,7 +42,7 @@ export default class Stories extends React.Component{
     this.state = {
       selectedCategory: 'Top',
       stories:{},
-      error: null
+      loading: true
     }
 
     this.updateCategory = this.updateCategory.bind(this)
@@ -65,7 +66,8 @@ export default class Stories extends React.Component{
             stories:{
               ...stories,
               [selection]: data
-            }
+            },
+            loading: false
           }))
         })
         .catch(error => {
@@ -76,8 +78,6 @@ export default class Stories extends React.Component{
           })
         }) 
        
-                
-
   }
 
   //loading screen
@@ -87,7 +87,7 @@ export default class Stories extends React.Component{
 
     return (
       <React.Fragment>
-        
+        {this.state.loading && <Loading/>}
         {/* need to check if stories exist bc of async */}
         {stories[selectedCategory] && <StoryList stories = {stories[selectedCategory]}/>}
         
@@ -95,6 +95,3 @@ export default class Stories extends React.Component{
     )
   }
 }
-
-
-
