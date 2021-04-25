@@ -4,12 +4,14 @@
 
 #root{
   margin: 0 auto;
- 
+  height: 100%;
+  width: 100%;
+  
 }
 
 html, body {
   margin:0;
-  height: 0;
+  height: 100%;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
 }
@@ -26,10 +28,12 @@ html, body {
 }
 
 .light{
+  min-height: 100%;
   background-color: white;
 }
 
 .dark{
+  min-height: 100%;
   background-color: #1c2022;
   color: #DADADA;;
 }
