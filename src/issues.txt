@@ -7,3 +7,4 @@
 - filter posts with not by property (they are deleted)
 - post with 0 comments are undefined
 - title on /post is an HTML string
+- Add higher order components (HOC) for hovering feature

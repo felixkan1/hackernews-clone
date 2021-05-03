@@ -30,12 +30,14 @@ html, body {
 .light{
   min-height: 100%;
   background-color: white;
+  transition: 0.5s all ease;
 }
 
 .dark{
   min-height: 100%;
   background-color: #1c2022;
-  color: #DADADA;;
+  color: #DADADA;
+  transition: 0.5s all ease;
 }
 
 .btn-clear{
@@ -68,7 +70,6 @@ html, body {
 
 .posts{
  padding: 0;
- padding-bottom: 40px;
 }
 
 .post{
